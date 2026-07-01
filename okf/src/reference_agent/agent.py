@@ -13,7 +13,7 @@ from reference_agent.tools.source_tools import (
 )
 from reference_agent.tools.web_tools import fetch_url
 
-DEFAULT_MODEL = "gemini-flash-latest"
+DEFAULT_MODEL = "gemini-3.5-flash"
 
 
 def _load_prompt(filename: str) -> str:
