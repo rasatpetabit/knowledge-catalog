@@ -1,0 +1,23 @@
+# Knowledge Catalog
+
+> Google Cloud Knowledge Catalog tools, agents, and samples for data metadata management, enrichment, and AI-powered search.
+
+GoogleCloudPlatform/knowledge-catalog (vendored under /srv/dev/knowledge-catalog) is a reference/demo repository for **Knowledge Catalog** (formerly Dataplex), Google Cloud's AI-powered data catalog and metadata management platform.
+
+## Knowledge index — start here
+
+- [.okf/index.md](.okf/index.md): in-repo knowledge catalog: what this repo is, structure, conventions, pointers.
+- [Enrichment Agent](.okf/enrichment-agent.md)
+- [mdcode - Metadata as Code toolbox](.okf/mdcode.md)
+- [Open Knowledge Format Reference Agent](.okf/okf-reference-agent.md)
+
+## Repo entry points
+
+- [README.md](README.md): project overview, install, usage.
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Workspace catalog
+
+- [knowledge-catalog catalog](../okf-workspace/repos/knowledge-catalog.md): curated description in the fleet /srv/dev workspace index.
+- [Workspace index](../okf-workspace/index.md): master catalog of all repos under /srv/dev, grouped by area.
+- [Back to workspace root](../llms.txt)

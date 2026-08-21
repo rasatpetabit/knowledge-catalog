@@ -1,5 +1,6 @@
 ---
 type: index
+resource: /srv/dev/okf-workspace/repos/knowledge-catalog.md
 title: knowledge-catalog repo index
 timestamp: 2026-07-01T00:00:00Z
 privacy: private

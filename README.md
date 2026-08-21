@@ -23,3 +23,8 @@ All solutions within this repository are provided under the [Apache 2.0](https:/
 ## Disclaimer
 
 This repository and its contents are not an official Google product.
+
+## Knowledge
+
+Structured project knowledge is cataloged in the `.okf/` directory.
+See [`.okf/index.md`](.okf/index.md) for the repo's knowledge index.
