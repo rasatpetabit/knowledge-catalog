@@ -11,7 +11,7 @@ tags: [okf, mdcode, kcmd, mcp, metadata]
 `toolbox/mdcode/` defines a source-code-artifact model for Knowledge Catalog
 metadata: YAML/Markdown files in a hierarchical directory layout mirroring
 the resource hierarchy, with bi-directional sync to the catalog service.
-Distributed as TypeScript/Python libraries, a `kcmd` CLI, and an MCP server.
+Distributed as a TypeScript library, a `kcmd` CLI, and an MCP server.
 
 ## Layout
 

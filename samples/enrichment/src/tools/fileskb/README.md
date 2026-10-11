@@ -14,11 +14,11 @@ The server can be provided to the agent using standard MCP configuration:
 {
   "mcpServers": {
     "fileskb": {
-      "command": "/usr/local/google/home/nikhilko/p/kc/enrichment2/src/.venv/bin/python3",
+      "command": "${KC_ENRICH_SRC_DIR}/.venv/bin/python3",
       "args": [
-        "/usr/local/google/home/nikhilko/p/kc/enrichment2/src/tools/fileskb/main.py",
+        "${KC_ENRICH_SRC_DIR}/tools/fileskb/main.py",
         "--dir",
-        "/usr/local/google/home/nikhilko/p/kc/enrichment2/demo/docs"
+        "${KC_ENRICH_SAMPLE_DOCS_DIR}"
       ]
     }
   }

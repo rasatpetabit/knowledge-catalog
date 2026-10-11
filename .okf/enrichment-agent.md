@@ -3,7 +3,7 @@ type: reference
 title: Enrichment Agent
 timestamp: 2026-07-01T00:00:00Z
 privacy: private
-tags: [okf, enrichment, kcenrich, agent]
+tags: [okf, enrichment, kcagent, agent]
 ---
 
 # Enrichment Agent
@@ -14,7 +14,7 @@ on top of the `mdcode`/`kcmd` capability (see [mdcode.md](mdcode.md)).
 
 ## Layout
 
-- `toolbox/enrichment/` — enrichment agent toolbox providing the `kcenrich`
+- `toolbox/enrichment/` — enrichment agent toolbox providing the `kcagent`
   CLI. Subdirs: `src/agent/`, `src/tools/`.
 - `samples/enrichment/` — sample application of the enrichment agent, with
   `sample/config/`, `sample/data/`, `sample/docs/`, and `src/enrichment/`,

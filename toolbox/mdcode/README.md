@@ -11,7 +11,7 @@ More details are in the [docs/concept.md](docs/concept.md).
 * Intuitive human and agent-friendly representation of metadata as source code in YAML and markdown files. Artifacts are organized in a hierarchical manner mirroring the resource hierarchy of data and metadata assets.
 * Bi-directional sync between local workspace and catalog service.
 * Support for both 1st party and 3rd party metadata constructs.
-* Distributed as a TypeScript and Python libraries, a CLI tool (kcmd), and an MCP server for use in a variety of applications, agents and workflows.
+* Distributed as a TypeScript library, a CLI tool (kcmd), and an MCP server for use in a variety of applications, agents and workflows.
 
 ## Metadata Artifacts
 
@@ -32,11 +32,11 @@ path/to/root/
 ## Catalog Snapshot Files
 
 ### Manifest File
-**catalog/catalog.yaml**
+**catalog.yaml**
 ```yaml
 scope: bq-dataset.prod-data.ecommerce
 
-aliases:
+aliases:                            # NOTE: not yet supported by the manifest parser; currently ignored.
   ca-guidelines:
     aspect: data-agents-project.global.ca-guidelines
   ecommerce:
@@ -104,29 +104,34 @@ npm install kcmd
 ```typescript
 import * as kcmd from 'kcmd';
 
+const ctx = kcmd.gcp.ApiContext.default();
+
 // Creating a catalog manifest from scratch
-const manifest = new kcmd.CatalogManifest(...);
-manifest.save('/path/to/root');
+const manifest = await kcmd.CatalogManifest.initWithBigQuery('<projectId>.<datasetId>', ctx);
+manifest.save('catalog.yaml');
 
 // Loading a catalog snapshot from the filesystem
-const snapshot = kcmd.CatalogSnapshot.fromPath('/path/to/root');
+const snapshot = await kcmd.CatalogSnapshot.fromPath('/path/to/root', ctx);
 
 // Pulling the latest metadata from the Catalog service.
-const pullResult = await snapshot.pull();
+const catalog = new kcmd.dataplex.CatalogClient(ctx);
+const sync = new kcmd.CatalogSync(catalog, snapshot);
+
+const pullResult = await sync.pull();
 if (pullResult.success) {
   console.log('Metadata pulled successfully');
 }
 else {
-  console.error('Metadata pull failed:', pullResult.error);
+  console.error('Metadata pull failed:', pullResult.details);
 }
 
 // Pushing the modified metadata to the Catalog service.
-const pushResult = await snapshot.push();
+const pushResult = await sync.push();
 if (pushResult.success) {
   console.log('Metadata pushed successfully');
 }
 else {
-  console.error('Metadata push failed:', pushResult.error);
+  console.error('Metadata push failed:', pushResult.details);
 }
 ```
 
@@ -141,27 +146,15 @@ kcmd init --bigquery-dataset <projectId>.<datasetId>
 # Initialize a new catalog snapshot for multiple bigquery datasets
 kcmd init --bigquery-dataset <projectId>.<datasetId1> --bigquery-dataset <projectId>.<datasetId2>
 
-# Initialize a new catalog snapshot for a bigquery dataset with specific types
-kcmd init --bigquery-dataset <projectId>.<datasetId> \
-  --entry bigquery-table --entry bigquery-view \
-  --aspect overview --aspect description
-
 # Initialize a new catalog snapshot for a custom EntryGroup
 kcmd init --entry-group <projectId>.<locationId>.<entryGroupId>
 
 # Pull the latest catalog snapshot from the Knowledge Catalog service
-# Reports any conflicts if there are pending changes that have not been
-# pushed to the catalog.
-# Supports dry run with the --dry-run flag.
 kcmd pull
 
-# Check for local modifications
-kcmd status
-
-# Push local changes to the Knowledge Catalog service. Only pushes changes
-# made since the last pull, and if that metadata has not been modified within
-# catalog in the interim.
-# Supports dry run with the --dry-run flag.
+# Push local snapshot entries to the Knowledge Catalog service. Currently
+# updates all snapshot entries unconditionally, without change detection or
+# conflict handling.
 kcmd push
 ```
 
@@ -186,8 +179,6 @@ The server offers the following tools:
 
 | Tool             | Description                                           |
 |------------------|-------------------------------------------------------|
-| pull             | Pull the latest metadata from the Catalog service     |
-| push             | Push the modified metadata to the Catalog service     |
 | list-entries     | List entries in the catalog snapshot                  |
 | lookup-entry     | Lookup an entry and its metadata from the snapshot    |
 | modify-entry     | Modify an entry and its metadata in the snapshot      |

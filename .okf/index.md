@@ -17,8 +17,8 @@ context management, metadata enrichment, and retrieval solutions on top of
 Knowledge Catalog. It is explicitly **not an official Google product** (see
 `README.md` disclaimer). Apache 2.0 licensed.
 
-No repo-local `AGENTS.md` or `CLAUDE.md` exists, so these OKF docs use the
-default `.okf/` placement.
+A repo-local `AGENTS.md` exists at the repository root; no `CLAUDE.md` exists.
+These OKF docs use the default `.okf/` placement.
 
 ## Tech stack
 
@@ -27,7 +27,7 @@ default `.okf/` placement.
 - Google ADK (Agent Development Kit)
 - BigQuery
 - YAML/Markdown metadata artifacts
-- MCP server, CLI tools (`kcmd`, `kcenrich`)
+- MCP server, CLI tools (`kcmd`, `kcagent`)
 
 ## Key components
 
@@ -41,10 +41,10 @@ default `.okf/` placement.
   Search APIs.
 - `samples/enrichment/` — agentic enrichment sample that generates and
   publishes documentation for data assets.
-- `toolbox/mdcode/` — "Metadata as Code" TypeScript/Python library, the
+- `toolbox/mdcode/` — "Metadata as Code" TypeScript library, the
   `kcmd` CLI, and an MCP server for treating metadata artifacts as
   YAML/Markdown source code.
-- `toolbox/enrichment/` — enrichment agent toolbox providing the `kcenrich`
+- `toolbox/enrichment/` — enrichment agent toolbox providing the `kcagent`
   CLI, depends on `toolbox/mdcode`.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `LICENSE.md` — standard OSS
   governance files.
